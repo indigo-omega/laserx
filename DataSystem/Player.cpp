@@ -1,3 +1,5 @@
+#include<thread>
+
 #include "player.h"
 
 #define START_AMMO
@@ -20,6 +22,9 @@ int Weapon::getAmmo()
     return this->ammo;
 }
 
+void Weapon::setActive(bool b){this->active = b; /*disable weapon hardware*/}
+bool Weapon::getActive(){return this->active;}
+
 
 Suit::Suit()
 {
@@ -27,19 +32,27 @@ Suit::Suit()
     this->hp = 100;
 }
 
+void Suit::setActive(bool b){this->active = b; /*disable weapon hardware*/}
+bool Suit::getActive(){return this->active;}
+
 Player::Player()
 {
     this->suit = new Suit();
     this->weapon = new Weapon();
 }
 
-Player::Player(Weapon& w, Suit& s)
+Player::Player(Weapon* w, Suit* s)
 {
-    this->suit = *s;
-    this->weapon = *w;
+    this->suit = s;
+    this->weapon = w;
 }
 Player::~Player()
 {
     delete this->suit;
     delete this->weapon;
+}
+
+void Player::playerHit()
+{
+    this->weapon
 }
