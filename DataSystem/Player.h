@@ -29,6 +29,7 @@ public:
     Suit();
     void setActive(bool);
     bool getActive();
+    
 
 }
 
@@ -44,6 +45,7 @@ public:
     ~Player();
 
     void playerHit();
+    void friend cancelDisable(Player*);
 }
 
 

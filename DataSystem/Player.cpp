@@ -1,8 +1,13 @@
 #include<thread>
-
+#include<mutex>
+#include<time.h>
 #include "player.h"
 
-#define START_AMMO
+
+#define HOLD_AFTER_HIT 5
+#define START_AMMO 1000
+
+mutex player_mutex;
 
 using namepsace std;
 
@@ -52,7 +57,23 @@ Player::~Player()
     delete this->weapon;
 }
 
+void cancelDisable(Player* p)
+{
+    time_t start = time(NULL);
+    while(time(NULL) - start  > HOLD_AFTER_HIT);
+    //using shared resource, should use mutex:
+    player_mutex.lock();
+    p->weapon->setActive(true);
+    p->weapon->setActive(true);
+    player_mutex.unlock();
+}
+
 void Player::playerHit()
 {
-    this->weapon
+    
+    this->weapon->setActive(false);
+    this->suit->setActive(false);
+    thread t(cancelDisable, this);
+    t.detach();
+    
 }
