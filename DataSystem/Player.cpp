@@ -6,6 +6,7 @@
 
 #define HOLD_AFTER_HIT 5
 #define START_AMMO 1000
+#define DEFAULT_HP 100
 
 mutex player_mutex;
 
@@ -34,11 +35,15 @@ bool Weapon::getActive(){return this->active;}
 Suit::Suit()
 {
     this->active = true;
-    this->hp = 100;
+    this->hp = DEFAULT_HP;
 }
 
 void Suit::setActive(bool b){this->active = b; /*disable weapon hardware*/}
 bool Suit::getActive(){return this->active;}
+
+void Suit::reduceHp(int d){if(d < 0) return; this->hp -= d;}
+void Suit::restoreHp(){this->hp = DEFAULT_HP;}
+int Suit::getHp(){return this->hp;}
 
 Player::Player()
 {
@@ -68,9 +73,10 @@ void cancelDisable(Player* p)
     player_mutex.unlock();
 }
 
-void Player::playerHit()
+void Player::playerHit(int damage)
 {
-    
+    if(damage < 0) return;
+    this->suit->reduceHp(damage);
     this->weapon->setActive(false);
     this->suit->setActive(false);
     thread t(cancelDisable, this);

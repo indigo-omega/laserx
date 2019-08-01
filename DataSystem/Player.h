@@ -23,12 +23,16 @@ public:
 class Suit
 {
 private:
+
     bool active;
     int hp;
 public:
     Suit();
     void setActive(bool);
     bool getActive();
+    void reduceHp(int);
+    void restoreHp();
+    int getHp();
     
 
 }
@@ -36,6 +40,7 @@ public:
 class Player
 {
 protected:
+    //keep client address here...
     Weapon* weapon;
     Suit* suit;
     String name;
@@ -44,7 +49,8 @@ public:
     Player(Weapon& w, Suit& s);
     ~Player();
 
-    void playerHit();
+    //function to return client address here...
+    void playerHit(int);
     void friend cancelDisable(Player*);
 }
 
