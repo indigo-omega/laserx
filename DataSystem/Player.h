@@ -52,6 +52,7 @@ public:
     //function to return client address here...
     void playerHit(int);
     void friend cancelDisable(Player*);
+    String getName(){return this->name;}
 }
 
 

@@ -32,5 +32,5 @@ class Player:
         self.suit.active = False
         t = threading.Thread(target = disable_active_change, args = (self,))
         t.start()
-        #I think it would not wait, it should'nt
+        #I think it would not wait, it should'nt    
         

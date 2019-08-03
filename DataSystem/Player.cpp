@@ -81,5 +81,5 @@ void Player::playerHit(int damage)
     this->suit->setActive(false);
     thread t(cancelDisable, this);
     t.detach();
-    
 }
+
