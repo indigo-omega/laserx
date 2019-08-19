@@ -1,3 +1,5 @@
+#ifndef GAME_SYSTEM_H
+#define GAME_SYSTEM_H
 #include "Player.h"
 #include<map>
 #include<string>
@@ -22,3 +24,5 @@ public:
     ActionRsult removePlayer(int key);
     ActionRsult removePlayer(Player p); 
 }
+
+#endif
