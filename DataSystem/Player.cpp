@@ -83,7 +83,7 @@ bool Player::playerShot(Player* hitted, HIT_TYPE hit)
     if(!this->weapon->getActive()) return;
     if(!hitted->suit->getActive()) return;
     hitted->playerHit((int)hit);//damaged might not be usfull
-    this->weapon
+    
     return true;
     //save score to file
 }
