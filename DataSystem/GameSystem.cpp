@@ -31,7 +31,6 @@ ActionResult GameSystem::addPlayer(Player& p, int key)
     return SUCCESS;
 
 }
-
 ActionResult GameSystem::removePlayer(int key)
 {
     if(!keyExists(this->players, key))
@@ -54,4 +53,13 @@ ActionResult GameSystem::removePlayer(Player& p)
         }
     }
     return SUCCESS;
+}
+
+Player* GameSystem::getPlayer(int key)
+{
+    map<int, Player&>::iterator it = this->players.find(key);
+    if (it == this->players.end())
+        return NULL;
+    else
+        return &(it->first);
 }

@@ -8,7 +8,6 @@
 #define START_AMMO 1000
 #define DEFAULT_HP 100
 
-using namepsace std;
 
 Weapon::Weapon()
 {
@@ -89,13 +88,13 @@ bool Player::playerShot(Player* hitted, HIT_TYPE hit)
 }
 
 
-void cancelDisable(Player* p, mutex m)
+void cancelDisable(Player* p)
 {
     time_t start = time(NULL);
     while(time(NULL) - start  > HOLD_AFTER_HIT);
     //using shared resource, should use mutex:
-    m.lock();
+    p->player_mutex.lock();
     p->weapon->setActive(true);
     p->weapon->setActive(true);
-    m.unlock();
+    p->player_mutex.unlock();
 }

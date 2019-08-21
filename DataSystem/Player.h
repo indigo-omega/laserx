@@ -1,11 +1,11 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 
-#include<stdlib>
+#include<new>
 #include<String>
+#include<mutex>
+#include<string>
 
-
-using namepsace std;
+using namespace std;
 
 typedef enum{
     HEAD = 50, BODY = 30, BACK = 20
@@ -22,10 +22,10 @@ public:
     Weapon(int);
 
     int getAmmo();
-    void reduceAmmo();
+    void reduceAmmo(int);
     void setActive(bool);
     bool getActive();
-}
+};
 
 class Suit
 {
@@ -40,9 +40,9 @@ public:
     void reduceHp(int);//should be canceleld
     void restoreHp();
     int getHp();
-    
 
-}
+
+};
 
 class Player
 {
@@ -50,19 +50,17 @@ public:
     //keep client address here...
     Weapon* weapon;
     Suit* suit;
-    String name;
-    mutex player_mutex;
+    std::string name;
+    std::mutex player_mutex;
 
     Player();
-    Player(Weapon& w, Suit& s);
+    Player(Weapon* w, Suit* s);
     ~Player();
 
     //function to return client address here...
     void playerHit(int);
-    void playerShot();//returns whether the shot was successful.
+    void playerShot(Player* hitted, HIT_TYPE hit);//returns whether the shot was successful.
     void friend cancelDisable(Player*, HIT_TYPE);
-    String getName(){return this->name;}
-}
+    std::string getName() { return this->name; }
+};
 
-
-#endif
